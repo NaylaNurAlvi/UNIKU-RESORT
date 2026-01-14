@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login Konsumen - UNIKU Resort</title>
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --yellow:#FBC02D;
+      --dark:#111;
+    }
+
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg, var(--yellow) 50%, #fff 50%);
+      font-family: "Inter", Arial, sans-serif;
+    }
+
+    .login-card{
+      width:100%;
+      max-width:420px;
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 15px 30px rgba(0,0,0,.15);
+      padding:30px;
+    }
+
+    .login-title{
+      font-weight:700;
+      color:var(--dark);
+      text-align:center;
+    }
+
+    .login-subtitle{
+      text-align:center;
+      color:#777;
+      font-size:14px;
+      margin-bottom:25px;
+    }
+
+    .form-control:focus{
+      border-color:var(--yellow);
+      box-shadow:0 0 0 .15rem rgba(251,192,45,.35);
+    }
+
+    .btn-login{
+      background:var(--dark);
+      color:var(--yellow);
+      border:none;
+      font-weight:600;
+    }
+
+    .btn-login:hover{
+      background:#000;
+      color:#fff;
+    }
+
+    .note{
+      font-size:12px;
+      text-align:center;
+      color:#777;
+      margin-top:15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-card">
+    <h3 class="login-title">UNIKU Resort</h3>
+    <p class="login-subtitle">Login Konsumen</p>
+
+    <form id="loginForm">
+      <div class="mb-3">
+        <label class="form-label">Nama</label>
+        <input type="text" id="username" class="form-control" placeholder="Masukkan nama">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Masukkan password">
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-login">Masuk</button>
+      </div>
+    </form>
+
+    <p class="note">
+      *Hanya untuk konsumen UNIKU Resort
+    </p>
+    <div class="text-center mt-2">
+      <a href="../index.html" class="btn btn-link">Kembali ke Beranda</a>
+    </div>
+  </div>
+
+  <script>
+    // Jika sudah login, langsung ke dashboard
+    if(localStorage.getItem('consumerLoggedIn') === 'true'){
+      location.href = 'dashboard.html';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(e){
+      e.preventDefault();
+
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+
+
+      // Akun konsumen statis (simulasi)
+      if(user === 'konsumen' && pass === 'konsumen123'){
+        localStorage.setItem('consumerLoggedIn','true');
+        localStorage.setItem('consumerUser', user);
+        location.href = 'dashboard.html';
+      } else {
+        alert('Username atau password salah!');
+      }
+    });
+  </script>
+
+</body>
+</html>
